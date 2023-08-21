@@ -1,2 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 How are you
+=======
+That'right.
+=======
+//加第一行
+>>>>>>> ddef4cbdd4b6a4d54c6f1b34862a85c8799b08fa
+
+
+oh my god!!!!!!!!!!!!
+>>>>>>> 27d5d31b8813270e69960fc40d12732ca3dfa30b
