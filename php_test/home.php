@@ -22,6 +22,8 @@
         
     </form>
     
+    <a href="/test/db_connect.php">to db_connect</a>
+    
     <script>
         document.querySelector('#showPw').addEventListener('click', () => {
             var pwdE= document.querySelector('[name="password"]')
