@@ -1,0 +1,119 @@
+<html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title></title>
+    <link rel="icon" type="image/x-icon" href="/static/image/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+    
+
+    <style>
+        td{
+            border: solid 1px;
+            min-height: 30px !important;
+        }
+        .nameTag{
+            color: #969696;
+            width: fit-content;
+        }
+        .black{
+            background-color: black;
+            color: white;
+        }
+        .white{
+            color: black;
+        }
+    </style>
+    <script>
+        if('{{ errorMsg }}' != ''){
+            alert('{{ errorMsg }}');
+        }
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     var colors= ['black', 'white'];
+        //     document.querySelector('body').classList.add(colors[Math.floor(Math.random() * 2)]);
+        // })
+    </script>
+</head>
+
+<body class="{{ color  }}">
+    
+    <main class="container-fluid" style="padding: 10%;">
+        <div class="row">
+            <!-- 左邊入資料 -->
+            <form class="col-3 container-fluid" method="POST">
+                {% for col in cols %}
+                <div class="row">
+                    {{ col }}:
+                </div>
+                <div class="row">
+                    {% if col == "roomName" %}
+                    <select name="{{ col }}">
+                        <option>A</option>
+                        <option>B</option>
+                        <option>C</option>
+                    </select>
+                    {% elif col == "day" %}
+                    <select name="{{ col }}">
+                        {% for day in ['Sun','Mon','Tue','Wen','Thu','Fri','Sat'] %}
+                        <option>{{ day }}</option>
+                        {% endfor %}
+                    </select>
+                    {% elif col == "time" %}
+                    <select name="{{ col }}">
+                        {% for time in times %}
+                        <option>{{ time }}</option>
+                        {% endfor %}
+                    </select>
+                    {% else %}
+                    <input name="{{ col }}">
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <div class="row">
+                    <button type="submit">送出</button>
+                </div>
+            </form>
+            <!-- 右邊日曆 -->
+            <div class="col-9">
+                <table class="w-100">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            {% for day in ['Sun', 'Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat'] %}
+                            <td>{{ day }}</td>
+                            {% endfor %}
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+                        {% for time in times %}
+                        <tr>
+                            <td>{{ time }}</td>
+                            {% for day in ['Sun', 'Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat'] %}
+                            <td>
+                                <div class="container-fluid w-100">
+                                    {% for roomName in roomNames %}
+                                    <div class="row">
+                                        <span class="Nametag">{{ roomName }}:</span> {{ rooms.get(day,{}).get(time,{}).get(roomName,'') }}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+                
+            </div>
+        </div>
+        
+        
+    </main>
+</body>
+
+</html>
