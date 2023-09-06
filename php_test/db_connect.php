@@ -42,6 +42,7 @@
                         <a href="/test/db_edit.php?method=delete&sno=<?=$row['sno']?>"><button>刪除</button></a>
                     </td>
                 </tr>
+                
             <?php } ?>
         </tbody>
     </table>
